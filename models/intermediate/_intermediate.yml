@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_participant_quality
+    description: Participant-level eligibility audit. No source records are filtered.
+    columns:
+      - name: subject_id
+        tests:
+          - unique
+

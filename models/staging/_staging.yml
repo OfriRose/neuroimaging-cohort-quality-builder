@@ -2,24 +2,41 @@ version: 2
 
 models:
   - name: stg_abide_participants
-    description: >-
-      One row per unfiltered ABIDE I phenotypic source record. Sentinel and blank
-      missing values are normalized to NULL; eligibility is enforced downstream.
+    description: >
+      Cleaned ABIDE I phenotypic metadata. Blank values and -9999 are converted
+      to NULL; raw source rows are preserved without eligibility filtering.
+
     columns:
       - name: subject_id
-        tests:
+        description: ABIDE participant identifier.
+        data_tests:
+          - not_null
           - unique
-          - not_null
+
       - name: site_id
-        tests:
+        description: Data-acquisition site.
+        data_tests:
           - not_null
+
       - name: sex
-        tests:
+        description: Normalized biological sex derived from the ABIDE source code.
+        data_tests:
           - not_null
           - accepted_values:
-              values: ['male', 'female']
+              arguments:
+                values: ["male", "female"]
+
       - name: diagnostic_group
-        tests:
+        description: Normalized ABIDE diagnostic group.
+        data_tests:
           - not_null
           - accepted_values:
-              values: ['autism spectrum disorder', 'typically developing control']
+              arguments:
+                values:
+                  - "autism spectrum disorder"
+                  - "typically developing control"
+
+      - name: age_at_scan
+        description: Participant age at scan. Plausibility is audited separately.
+        data_tests:
+          - not_null

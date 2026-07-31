@@ -6,12 +6,14 @@ explicit data contracts, missing-value normalization, multi-site quality checks,
 and profiling for cohort design—without downloading images, diagnosing autism, or
 making clinical claims.
 
-## What Phase 1 delivers
+## What it delivers
 
 - PostgreSQL 16 in Docker Compose and a pinned `dbt-postgres` environment
 - An immutable raw CSV loaded as a dbt seed
 - `stg_abide_participants`, retaining every raw record while mapping coded fields
-- dbt tests for identity, required fields, categorical validity, and ages 7–64
+- Transparent eligibility flags, exclusions, and an auditable 1,111-person cohort
+- Site-held-out assignment: 944 training and 167 evaluation participants
+- dbt tests for identity, eligibility, and split isolation
 - A dependency-free profile of missingness and diagnosis distribution by site
 
 The governing data contract and site-held-out evaluation design are documented in
@@ -31,11 +33,5 @@ dbt build
 python scripts/profile_abide.py
 ```
 
-`dbt build` intentionally reports source quality violations rather than silently
-filtering them. Cohort inclusion logic belongs in a later downstream model.
-
-
-
-123654789-+
-
-+-*/
+The age-range source audit is warning-level: the out-of-range record remains in
+staging and is documented in cohort exclusions rather than breaking the build.

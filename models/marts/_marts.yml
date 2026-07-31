@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: base_cohort
+    description: Participants meeting every required-field rule in the cohort specification.
+    columns:
+      - name: subject_id
+        tests:
+          - unique
+          - not_null
+
+  - name: cohort_exclusions
+    description: One row per failed eligibility rule, allowing multiple reasons per participant.
+
+  - name: cohort_assignment
+    description: Eligible participants assigned by whole site to train or evaluation.
+    columns:
+      - name: subject_id
+        tests:
+          - unique
+          - not_null
+      - name: cohort_split
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['train', 'evaluation']
+
