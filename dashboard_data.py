@@ -15,6 +15,37 @@ REQUIRED_ARTIFACTS = (
     "cohort_split_summary.csv",
 )
 
+DISPLAY_LABELS = {
+    "ados_total": "ADOS total score",
+    "aq_total": "AQ total score",
+    "comorbidity": "Comorbidity recorded",
+    "dsm_iv_code": "DSM-IV code",
+    "full_scale_iq": "Full-scale IQ",
+    "performance_iq": "Performance IQ",
+    "scq_total": "SCQ total score",
+    "srs_raw_total": "SRS raw total score",
+    "verbal_iq": "Verbal IQ",
+    "cohort_split": "Cohort split",
+    "feature_name": "Feature",
+    "feature_label": "Feature",
+    "split_label": "Cohort split",
+    "available_count": "Available participants",
+    "missing_count": "Missing participants",
+    "participant_count": "Participants",
+    "coverage_pct": "Coverage (%)",
+    "site_label": "Site",
+    "mean_age": "Mean age",
+    "asd_pct": "ASD proportion (%)",
+    "mean_full_scale_iq": "Mean full-scale IQ",
+    "train": "Train",
+    "evaluation": "Evaluation",
+}
+
+
+def display_label(value: str) -> str:
+    """Return the shared public label for a field or categorical value."""
+    return DISPLAY_LABELS.get(value, value.replace("_", " ").capitalize())
+
 
 @st.cache_data
 def load_artifact(filename: str) -> pd.DataFrame:
