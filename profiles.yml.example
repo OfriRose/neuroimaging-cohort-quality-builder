@@ -1,0 +1,13 @@
+neuroimaging_cohort_quality_builder:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5432') | int }}"
+      user: "{{ env_var('POSTGRES_USER', 'abide') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD', 'abide_dev_password') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'abide') }}"
+      schema: analytics
+      threads: 4
+

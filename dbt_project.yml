@@ -1,0 +1,46 @@
+name: neuroimaging_cohort_quality_builder
+version: 1.0.0
+config-version: 2
+
+profile: neuroimaging_cohort_quality_builder
+
+model-paths: ["models"]
+seed-paths: ["data/raw"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+clean-targets: ["target", "dbt_packages", "logs"]
+
+models:
+  neuroimaging_cohort_quality_builder:
+    staging:
+      +materialized: view
+      +schema: staging
+
+seeds:
+  neuroimaging_cohort_quality_builder:
+    Phenotypic_V1_0b:
+      +alias: abide_i_phenotypic
+      +schema: raw
+      +quote_columns: false
+      +column_types:
+        SITE_ID: text
+        SUB_ID: text
+        DX_GROUP: text
+        DSM_IV_TR: text
+        AGE_AT_SCAN: text
+        SEX: text
+        FIQ: text
+        VIQ: text
+        PIQ: text
+        ADI_R_SOCIAL_TOTAL_A: text
+        ADI_R_VERBAL_TOTAL_BV: text
+        ADI_RRB_TOTAL_C: text
+        ADI_R_ONSET_TOTAL_D: text
+        ADOS_TOTAL: text
+        ADOS_COMM: text
+        ADOS_SOCIAL: text
+        SRS_RAW_TOTAL: text
+        SCQ_TOTAL: text
+        AQ_TOTAL: text
+        COMORBIDITY: text
+

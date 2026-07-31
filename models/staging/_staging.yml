@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_abide_participants
+    description: >-
+      One row per unfiltered ABIDE I phenotypic source record. Sentinel and blank
+      missing values are normalized to NULL; eligibility is enforced downstream.
+    columns:
+      - name: subject_id
+        tests:
+          - unique
+          - not_null
+      - name: site_id
+        tests:
+          - not_null
+      - name: sex
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['male', 'female']
+      - name: diagnostic_group
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['autism spectrum disorder', 'typically developing control']
