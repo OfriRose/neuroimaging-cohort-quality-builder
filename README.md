@@ -5,7 +5,7 @@ metadata into a tested cohort, quantifies coverage and site shift, and publishes
 only aggregate, de-identified dashboard outputs. It does not process images,
 diagnose autism, or make clinical claims.
 
-[Public dashboard placeholder](https://share.streamlit.io/)
+[View the live dashboard](https://neuroimaging-cohort.streamlit.app/)
 
 ```text
 Local ABIDE I data → PostgreSQL + dbt marts → checked-in aggregate CSVs → public Streamlit dashboard
