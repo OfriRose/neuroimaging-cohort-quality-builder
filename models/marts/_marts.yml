@@ -23,5 +23,35 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['train', 'evaluation']
+              arguments:
+                values: ['train', 'evaluation']
 
+  - name: feature_coverage
+    description: Optional enrichment coverage by site, cohort split, and diagnostic group.
+    columns:
+      - name: coverage_pct
+        tests:
+          - not_null
+
+  - name: site_shift
+    description: Descriptive site-level differences relative to the training cohort aggregate.
+    columns:
+      - name: site_id
+        tests:
+          - unique
+          - not_null
+      - name: cohort_split
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['train', 'evaluation']
+
+  - name: dataset_readiness
+    description: One-row structural and behavioral-enrichment readiness snapshot.
+    columns:
+      - name: is_structurally_ready
+        tests:
+          - not_null
+      - name: is_ready_for_behavioral_enrichment_analysis
+        tests:
+          - not_null
