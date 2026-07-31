@@ -1,0 +1,2 @@
+is_structurally_ready,is_ready_for_behavioral_enrichment_analysis,raw_participant_count,base_cohort_count,train_participant_count,evaluation_participant_count,train_site_count,evaluation_site_count,exclusions_display
+True,False,1112,1111,944,167,18,2,Suppressed (<10)

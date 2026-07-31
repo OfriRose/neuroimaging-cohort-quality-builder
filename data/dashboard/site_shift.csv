@@ -1,0 +1,4 @@
+cohort_split,site_label,participant_count,mean_age,asd_pct,mean_full_scale_iq
+evaluation,PITT,57,18.90,52.6,110.05
+evaluation,UM_1,110,13.40,50.0,105.08
+train,Training aggregate,944,17.37,48.1,108.67

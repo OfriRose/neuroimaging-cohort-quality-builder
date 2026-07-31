@@ -1,48 +1,34 @@
 # Neuroimaging Cohort Quality Builder
 
-A reproducible analytics-engineering pipeline that turns real ABIDE I phenotypic
-metadata into a tested, analysis-ready participant staging table. It demonstrates
-explicit data contracts, missing-value normalization, multi-site quality checks,
-and profiling for cohort design—without downloading images, diagnosing autism, or
-making clinical claims.
+An analytics-engineering portfolio project that turns local ABIDE I phenotypic
+metadata into a tested cohort, quantifies coverage and site shift, and publishes
+only aggregate, de-identified dashboard outputs. It does not process images,
+diagnose autism, or make clinical claims.
 
-## What it delivers
+[Public dashboard placeholder](https://share.streamlit.io/)
 
-- PostgreSQL 16 in Docker Compose and a pinned `dbt-postgres` environment
-- An immutable raw CSV loaded as a dbt seed
-- `stg_abide_participants`, retaining every raw record while mapping coded fields
-- Transparent eligibility flags, exclusions, and an auditable 1,111-person cohort
-- Site-held-out assignment: 944 training and 167 evaluation participants
-- Feature coverage, site-shift, and structural dataset-readiness audits
-- dbt tests for identity, eligibility, and split isolation
-- A dependency-free profile of missingness and diagnosis distribution by site
+```text
+Local ABIDE I data → PostgreSQL + dbt marts → checked-in aggregate CSVs → public Streamlit dashboard
+```
 
-The governing data contract and site-held-out evaluation design are documented in
-[`docs/cohort_spec.md`](docs/cohort_spec.md). Raw data under `data/raw/` is never
-modified by the pipeline.
+The public dashboard exposes no raw ABIDE files, participant records, identifiers,
+or participant-level derived artifacts. Its three pages explain cohort readiness,
+coverage limitations, and held-out site shift. See [DATA_ATTRIBUTION.md](DATA_ATTRIBUTION.md)
+for attribution and responsible-use information.
 
-## Run locally
+## Local refresh
+
+Register with ABIDE/NITRC, obtain access, and place the source files locally in
+`data/raw/`. They are intentionally not included in this repository.
 
 ```bash
-cp .env.example .env
-cp profiles.yml.example profiles.yml
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-docker compose up -d
-dbt seed
-dbt build
-python scripts/profile_abide.py
+pip install -r requirements-local.txt
+cp profiles.yml.example profiles.yml
+docker compose up -d --wait
+dbt build --profiles-dir .
+python scripts/export_dashboard_data.py
+streamlit run app.py
 ```
 
-The age-range source audit is warning-level: the out-of-range record remains in
-staging and is documented in cohort exclusions rather than breaking the build.
-
-## Dashboard
-
-After `dbt build`, run the three-page, read-only dashboard:
-
-```bash
-streamlit run dashboard/app.py
-```
-
-> Screenshot placeholder: Dataset Readiness page with cohort counts and readiness flags.
+> Screenshot placeholder: public Dataset Readiness page showing aggregate cohort and split counts.

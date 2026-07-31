@@ -1,0 +1,5 @@
+cohort_split,diagnostic_group,participant_count,site_count
+evaluation,autism spectrum disorder,85,2
+evaluation,typically developing control,82,2
+train,autism spectrum disorder,454,18
+train,typically developing control,490,18

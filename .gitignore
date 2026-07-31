@@ -1,4 +1,5 @@
 .env
+.streamlit/secrets.toml
 .venv/
 venv/
 __pycache__/
@@ -12,8 +13,19 @@ logs/
 dbt_packages/
 profiles.yml
 
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# Restricted ABIDE source data: retain locally, never track or deploy.
+data/raw/*
+!data/raw/.gitkeep
+data/raw/*.csv
+data/raw/*.pdf
+
 # Editor / OS files
 .idea/
 .vscode/
 .DS_Store
-
